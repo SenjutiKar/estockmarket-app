@@ -1,0 +1,11 @@
+<input
+	id="typeahead-focus"
+	type="text"
+	class="form-control"
+	[(ngModel)]="model"
+	[ngbTypeahead]="search"
+	(focus)="focus$.next($any($event).target.value)"
+	(click)="click$.next($any($event).target.value)"
+	placeholder="Search by code"
+	#instance style="display: inline-block;margin-right: 10px;"/>
+<button type="button" class="btn btn-primary" style="display: inline-block;" (click)="searchCompany()">Search</button>

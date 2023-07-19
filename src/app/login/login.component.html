@@ -1,0 +1,43 @@
+<nav class="navbar navbar-dark bg-dark nav-height">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="../../assets/logo2.jpg" alt="" width="60" height="60">
+            <strong class="nav-brand-text">E-Stockmarket</strong>
+        </a>
+    </div>   
+</nav>
+<div class="card card-style mt-5 mx-auto">
+    <form class="card-body mx-auto card-width" #loginFormGroup="ngForm" (ngSubmit)="login(loginFormGroup)">
+        <div class="mb-4 mt-4">
+            <label for="exampleInputUsername1" class="form-label">Username</label>
+            <input type="email" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" 
+            required [(ngModel)]="username" #usernamecontrol="ngModel" name="usernm"
+            [ngClass]="{'is-invalid': usernamecontrol.invalid && usernamecontrol.touched}">
+            <ng-container *ngIf="usernamecontrol.invalid && usernamecontrol.touched">
+                <div *ngIf="usernamecontrol.errors?.['required']" class="invalid-feedback">
+                    Username is required
+                </div>
+            </ng-container>
+        </div>
+        <div class="mb-5">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" required
+            [(ngModel)]="password" #pwdcontrol="ngModel" name="pwdtext"
+            [ngClass]="{'is-invalid': pwdcontrol.invalid && pwdcontrol.touched}">
+            <ng-container *ngIf="pwdcontrol.invalid && pwdcontrol.touched">
+                <div *ngIf="pwdcontrol.errors?.['required']" class="invalid-feedback">
+                    Password is required
+                </div>
+            </ng-container>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" [disabled]="loginFormGroup.invalid">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Login
+        </button>
+        <ng-container>
+            <div *ngIf="isUnauthorized" class="unauthorized-feedback">
+                Your username & password combination do not match. Please try again.
+            </div>
+        </ng-container>
+    </form>
+</div>

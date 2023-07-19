@@ -1,0 +1,25 @@
+.card-style{
+    width: 45%;
+    height: 70%;
+}
+
+.card-width{
+    width: 70%;
+}
+
+.nav-height{
+    height: 5rem;
+}
+
+.nav-brand-text{
+    margin-left: 10px;
+    font-size: larger;
+}
+
+.unauthorized-feedback{
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
+}

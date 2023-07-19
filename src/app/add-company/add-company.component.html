@@ -1,0 +1,92 @@
+<app-nav-bar></app-nav-bar>
+
+<div *ngIf="displayAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+    Company with code {{code}} added successfully.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+</div>
+<form class="row g-3 mx-auto mt-4" style="width: 90%;" #addCompanyFormGroup="ngForm" (ngSubmit)="onAddCompany(addCompanyFormGroup)">
+    <div class="col-md-4">
+        <label for="inputCode" class="form-label">Comapny Code</label>
+        <input type="text" class="form-control" id="inputCode" placeholder="Comp001" required name="code" 
+        [(ngModel)]="compCode" #companyCode="ngModel" 
+        [ngClass]="{'is-invalid': companyCode.invalid && companyCode.touched || checkExistingCompanyCode() }">
+        <ng-container *ngIf="companyCode.invalid && companyCode.touched || checkExistingCompanyCode()">
+            <div *ngIf="companyCode.errors?.['required']" class="invalid-feedback">
+                Please enter company code
+            </div>
+            <div *ngIf="checkExistingCompanyCode()" class="invalid-company-code">
+                Company code already exists
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-md-6">
+        <label for="inputName" class="form-label">Company Name</label>
+        <input type="text" class="form-control" id="inputName" required name="name" [(ngModel)]="compName"
+        [(ngModel)]="compName" #companyName="ngModel" [ngClass]="{'is-invalid': companyName.invalid && companyName.touched }">
+        <ng-container *ngIf="companyName.invalid && companyName.touched">
+            <div *ngIf="companyName.errors?.['required']" class="invalid-feedback">
+                Please enter company name
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-md-6">
+        <label for="inputCeo" class="form-label">Company CEO</label>
+        <input type="text" class="form-control" id="inputCeo" required name="ceo" [(ngModel)]="compCeo"
+        [(ngModel)]="compCeo" #companyCeo="ngModel" [ngClass]="{'is-invalid': companyCeo.invalid && companyCeo.touched }">
+        <ng-container *ngIf="companyCeo.invalid && companyCeo.touched">
+            <div *ngIf="companyCeo.errors?.['required']" class="invalid-feedback">
+                Please enter name of company CEO
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-md-4">
+        <label for="inputTurnover" class="form-label">Company Turnover</label>
+        <input type="number" class="form-control" id="inputTurnover" required name="turnover" 
+        [(ngModel)]="compTurnover" #companyTurnover="ngModel" placeholder="100000000"
+        [ngClass]="{'is-invalid': companyTurnover.invalid && companyTurnover.touched || isInvalidTurnover() }">
+        <div id="inputTurnoverHelpBlock" class="form-text">
+            Turnover must be greater than or equal to 10Cr.
+        </div>
+        <ng-container *ngIf="companyTurnover.invalid && companyTurnover.touched || isInvalidTurnover()">
+            <div *ngIf="companyTurnover.errors?.['required']" class="invalid-feedback">
+                Please enter company turnover
+            </div>
+            <div *ngIf="isInvalidTurnover()" class="invalid-company-turnover">
+                Company turnover is less than 100000000
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-md-4">
+        <label for="inputWebsite" class="form-label">Website</label>
+        <input type="text" class="form-control" id="inputWebsite" required name="website" [(ngModel)]="compWebsite"
+        [(ngModel)]="compWebsite" #companyWebsite="ngModel" 
+        [ngClass]="{'is-invalid': companyWebsite.invalid && companyWebsite.touched }">
+        <ng-container *ngIf="companyWebsite.invalid && companyWebsite.touched">
+            <div *ngIf="companyWebsite.errors?.['required']" class="invalid-feedback">
+                Please enter company website
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-md-4">
+        <label for="inputExchange" class="form-label">Stock Exchange</label>
+        <select class="form-select" id="inputExchange" data-placeholder="Choose anything" multiple required name="exchange" 
+        [(ngModel)]="stockExchange" #stockEx="ngModel" [ngClass]="{'is-invalid': stockEx.invalid && stockEx.touched }">
+            <option>BSE</option>
+            <option>NSE</option>
+            <option>Nasdaq</option>
+            <option>TSX</option>
+            <option>ASX</option>
+            <option>NYSE</option>
+            <option>LSE</option>
+            <option>MOEX</option>
+        </select>
+        <ng-container *ngIf="stockEx.invalid && stockEx.touched">
+            <div *ngIf="stockEx.errors?.['required']" class="invalid-feedback">
+                Please select stock exchange
+            </div>
+        </ng-container>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" [disabled]="addCompanyFormGroup.invalid || isInvalidTurnover()">Add Company</button>
+    </div>
+</form>

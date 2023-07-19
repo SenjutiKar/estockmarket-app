@@ -1,0 +1,99 @@
+<app-nav-bar></app-nav-bar>
+
+<div *ngIf="!isValidCompanyCode; else companyTemplate" class="card mx-auto" style="width: 28%;">
+    <div class="alert alert-info mx-auto mt-3" role="alert">
+        <h4>No data to display!</h4>
+        <p>Please enter a valid company code.</p>
+    </div>
+</div>
+<ng-template #companyTemplate>
+    <div class="container">
+        <div class="row grid-margin">
+            <div class="col-sm-4 mx-auto">
+                <h5><strong>Company Code :</strong></h5>
+            </div>
+            <div class="col-sm-4 mx-auto">
+                <h5>{{company.code}}</h5>
+            </div>
+        </div>
+        <div class="row grid-margin">
+            <div class="col-sm-4 mx-auto">
+                <h5><strong>Company Name :</strong></h5>
+            </div>
+            <div class="col-sm-4 mx-auto">
+                <h5>{{company.name}}</h5>
+            </div>
+        </div>
+        <div class="row grid-margin">
+            <div class="col-sm-4 mx-auto">
+                <h5><strong>Latest Stock Price :</strong></h5>
+            </div>
+            <div class="col-sm-4 mx-auto">
+                <h5>{{company.price}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card mt-4 card-style mx-auto">
+            <form class="card-body mx-auto" #dateFormGroup="ngForm" (ngSubmit)="onSubmit()">
+                <h6 class="card-title mb-4">Select a date range to view stock prices:</h6>
+                <div class="input-align">
+                    <label class="label-margin">Start Date:</label>
+                    <input type="date" required #startDateControl="ngModel" [(ngModel)]="startDate" name="startDt"
+                        [ngClass]="{'is-invalid': startDateControl.invalid && startDateControl.touched }">
+                    <ng-container *ngIf="startDateControl.invalid && startDateControl.touched">
+                        <div *ngIf="startDateControl.errors?.['required']" class="invalid-feedback">
+                            Please select a start date
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="input-align">
+                    <label class="label-margin">End Date:</label>
+                    <input type="date" required #endDateControl="ngModel" [(ngModel)]="endDate" name="endDt"
+                        [ngClass]="{'is-invalid': endDateControl.invalid && endDateControl.touched }" class="end-date-margin">
+                    <ng-container *ngIf="(endDateControl.invalid && endDateControl.touched)||(invalidDateRange())">
+                        <div *ngIf="endDateControl.errors?.['required']" class="invalid-feedback">
+                            Please select a end date
+                        </div>
+                        <div *ngIf="invalidDateRange()" class="invalid-date-range">
+                            Please enter a valid range of date
+                        </div>
+                    </ng-container>
+                    
+                </div>
+                <div class="button-align">
+                <button class="btn btn-primary btn-margin" [disabled]="dateFormGroup.invalid || invalidDateRange()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="isStockDetailsPresent">
+        <div class="table-style">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                    <th scope="col">Stock Price</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let stock of stockPriceDetails">
+                        <td>{{stock.price}}</td>
+                        <td>{{stock.date}}</td>
+                        <td>{{stock.time}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container mb-4">
+            <div class="card" style="width: 22rem;">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Maximum Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{maxPrice}}</li>
+                    <li class="list-group-item"><strong>Minimum Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{minPrice}}</li>
+                    <li class="list-group-item"><strong>Average Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{avgPrice}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-template>

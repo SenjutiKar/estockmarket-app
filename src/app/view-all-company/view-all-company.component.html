@@ -1,0 +1,38 @@
+<app-nav-bar></app-nav-bar>
+
+<div *ngIf="!isCompanyPresent; else companyDetails" class="card mx-auto" style="width: 28%;">
+    <div class="alert alert-info mx-auto mt-3" role="alert">
+        <h4>No data to display!</h4>
+        <p>Please add company details.</p>
+    </div>
+</div>
+<ng-template #companyDetails>
+    <div class="table-style">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Company Code</th>
+                <th scope="col">Name</th>
+                <th scope="col">CEO</th>
+                <th scope="col">Turnover</th>
+                <th scope="col">Stock Exchange</th>
+                <th scope="col">Latest Stock Price</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let company of companies">
+                <td>{{company.code}}</td>
+                <td>{{company.name}}</td>
+                <td>{{company.ceo}}</td>
+                <td>{{company.turnover}}</td>
+                <td>{{company.stockExchange}}</td>
+                <td>{{company.price}}</td>
+                <td>{{company.date}}</td>
+                <td>{{company.time}}</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</ng-template>

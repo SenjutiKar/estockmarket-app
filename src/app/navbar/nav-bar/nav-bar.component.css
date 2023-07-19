@@ -1,0 +1,27 @@
+.nav-bg-color{
+    background-color: #bc4639;
+}
+
+.nav-link-color{
+    color: #f3e0dc;
+    font-weight: bold;
+}
+
+.nav-brand-color{
+    color: #5c2018;
+    font-weight: bolder;
+    font-size:x-large;
+}
+
+.nav-brand-text{
+    margin-left: 10px;
+    font-size: larger;
+}
+
+.logout-margin{
+    margin-left: 21rem;
+}
+
+.nav-margin{
+    margin-left: 1rem;
+}
