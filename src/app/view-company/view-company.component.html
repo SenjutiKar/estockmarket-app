@@ -29,7 +29,7 @@
                 <h5><strong>Latest Stock Price :</strong></h5>
             </div>
             <div class="col-sm-4 mx-auto">
-                <h5>{{company.price}}</h5>
+                <h5>{{company.price | currency : 'INR' : 'symbol'}}</h5>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let stock of stockPriceDetails">
-                        <td>{{stock.price}}</td>
+                        <td>{{stock.price | currency : 'INR' : 'symbol'}}</td>
                         <td>{{stock.date}}</td>
                         <td>{{stock.time}}</td>
                     </tr>
@@ -89,9 +89,9 @@
         <div class="container mb-4">
             <div class="card" style="width: 22rem;">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Maximum Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{maxPrice}}</li>
-                    <li class="list-group-item"><strong>Minimum Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{minPrice}}</li>
-                    <li class="list-group-item"><strong>Average Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{avgPrice}}</li>
+                    <li class="list-group-item"><strong>Maximum Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{maxPrice | currency : 'INR' : 'symbol'}}</li>
+                    <li class="list-group-item"><strong>Minimum Price:&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{minPrice | currency : 'INR' : 'symbol'}}</li>
+                    <li class="list-group-item"><strong>Average Price:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{avgPrice | currency : 'INR' : 'symbol'}}</li>
                 </ul>
             </div>
         </div>

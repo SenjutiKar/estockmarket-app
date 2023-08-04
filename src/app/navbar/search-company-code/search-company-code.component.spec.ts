@@ -1,4 +1,7 @@
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CompanyService } from 'src/app/services/company.service';
 
 import { SearchCompanyCodeComponent } from './search-company-code.component';
 
@@ -8,7 +11,9 @@ describe('SearchCompanyCodeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchCompanyCodeComponent ]
+      declarations: [SearchCompanyCodeComponent],
+      imports: [HttpClientTestingModule, HttpClientModule],
+      providers: [CompanyService]
     })
     .compileComponents();
 

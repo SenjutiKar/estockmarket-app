@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CompanyService } from '../services/company.service';
 import { ActivatedRoute } from '@angular/router';
 import { CompanyResponse } from '../models/CompanyResponse';
@@ -10,7 +10,7 @@ import { StockPriceDetails } from '../models/stockPriceDetails';
   templateUrl: './view-company.component.html',
   styleUrls: ['./view-company.component.css']
 })
-export class ViewCompanyComponent implements OnInit {
+export class ViewCompanyComponent implements OnInit, OnDestroy {
 
   isValidCompanyCode: boolean = true;
   companyCode: string = '';
@@ -27,6 +27,7 @@ export class ViewCompanyComponent implements OnInit {
   private stockService: StockService) { }
 
   ngOnInit(): void {
+    document.body.classList.add('bg-img');
     this.activatedRoute.params.subscribe(params => {
       this.companyCode = params['code'];
     });
@@ -66,6 +67,10 @@ export class ViewCompanyComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  ngOnDestroy() {
+    document.body.classList.remove('bg-img');
   }
 
 }

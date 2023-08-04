@@ -19,9 +19,22 @@
 }
 
 .logout-margin{
-    margin-left: 21rem;
+    margin-left: 2rem;
 }
 
 .nav-margin{
     margin-left: 1rem;
+}
+
+.person-icon-margin{
+    margin-left: 8rem;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.profile-style{
+    color: white;
+    margin-left: 0.5rem;
+    display: inline-block;
+    font-weight: 200;
 }

@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.userService.getuserTokenDetails()) {
-      const userToken = this.userService.getuserTokenDetails().jwtToken;
+      const userToken = this.userService.getuserTokenDetails();
       const isApiUrl = request.url.startsWith(environment.apiUrl);
       if (userToken && isApiUrl) {
         request = request.clone({

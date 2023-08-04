@@ -7,15 +7,17 @@ import { ViewAllCompanyComponent } from './view-all-company/view-all-company.com
 import { ViewCompanyComponent } from './view-company/view-company.component';
 import { LoginComponent } from './login/login.component';
 import { AuthguardService } from './services/authguard.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'view-all-companies', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent, canActivate: [AuthguardService] },
-  { path: 'company', component: AddCompanyComponent, canActivate: [AuthguardService] },
-  { path: 'allcompanies', component: ViewAllCompanyComponent, canActivate: [AuthguardService] },
-  { path: 'companycode/:code', component: ViewCompanyComponent, canActivate: [AuthguardService] },
-  { path: 'stock', component: AddStockComponent, canActivate: [AuthguardService] },
-  { path: '**', redirectTo: '' }
+  // { path: '', component: HomeComponent, canActivate: [AuthguardService] },
+  { path: 'add-company', component: AddCompanyComponent, canActivate: [AuthguardService] },
+  { path: 'view-all-companies', component: ViewAllCompanyComponent, canActivate: [AuthguardService] },
+  { path: 'view-company/:code', component: ViewCompanyComponent, canActivate: [AuthguardService] },
+  { path: 'add-stock', component: AddStockComponent, canActivate: [AuthguardService] },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

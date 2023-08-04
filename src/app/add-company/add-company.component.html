@@ -4,7 +4,8 @@
     Company with code {{code}} added successfully.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
 </div>
-<form class="row g-3 mx-auto mt-4" style="width: 90%;" #addCompanyFormGroup="ngForm" (ngSubmit)="onAddCompany(addCompanyFormGroup)">
+<div class="card mx-auto mt-4" style="width: 65%;">
+<form class="card-body row g-3 mx-auto mt-4" style="width: 90%;" #addCompanyFormGroup="ngForm" (ngSubmit)="onAddCompany(addCompanyFormGroup)">
     <div class="col-md-4">
         <label for="inputCode" class="form-label">Comapny Code</label>
         <input type="text" class="form-control" id="inputCode" placeholder="Comp001" required name="code" 
@@ -86,7 +87,12 @@
             </div>
         </ng-container>
     </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary" [disabled]="addCompanyFormGroup.invalid || isInvalidTurnover()">Add Company</button>
+    <div class="col-12 mt-4">
+        <button type="submit" [ngClass]="(addCompanyFormGroup.invalid || isInvalidTurnover() || checkExistingCompanyCode())
+         ? 'btn btn-secondary': 'btn btn-primary'" 
+         [disabled]="addCompanyFormGroup.invalid || isInvalidTurnover() || checkExistingCompanyCode()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+         Add Company</button>
     </div>
 </form>
+</div>

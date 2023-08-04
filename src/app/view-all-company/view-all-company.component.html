@@ -28,7 +28,7 @@
                 <td>{{company.ceo}}</td>
                 <td>{{company.turnover}}</td>
                 <td>{{company.stockExchange}}</td>
-                <td>{{company.price}}</td>
+                <td>{{company.price | currency: 'INR' : 'symbol'}}</td>
                 <td>{{company.date}}</td>
                 <td>{{company.time}}</td>
             </tr>

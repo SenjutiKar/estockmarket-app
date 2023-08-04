@@ -27,7 +27,7 @@ export class SearchCompanyCodeComponent implements OnInit {
 	ngOnInit(): void {
 		this.companyService.setCompanyCodeList();
 		this.companyService.getCompanyCodeList.subscribe(companyCodeList => {
-			this.companyCodes = companyCodeList;
+			this.companyCodes = companyCodeList.sort();
 		});
 	}
 
@@ -44,7 +44,7 @@ export class SearchCompanyCodeComponent implements OnInit {
 
 	searchCompany() {
 		this.companyService.setCompany(this.model);
-		this.router.navigateByUrl(`/companycode/${this.model}`);
+		this.router.navigateByUrl(`/view-company/${this.model}`);
 		this.model = '';
 	}
 }

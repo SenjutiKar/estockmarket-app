@@ -5,17 +5,22 @@ import { AuthguardService } from './authguard.service';
 import { UserService } from './user.service';
 import { User } from '../models/User';
 import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthguardService', () => {
   let service: AuthguardService;
   let userService: UserService;
   let client: HttpClient;
   let router: Router;
+  let mockRouter = {
+    navigateByUrl: jasmine.createSpy('navigate')
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, HttpClientModule],
-      providers: [UserService, HttpClient, Router]
+      imports: [HttpClientTestingModule, HttpClientModule, RouterTestingModule],
+      providers: [UserService, HttpClient, AuthguardService,
+        { provide: Router, useValue: mockRouter }]
     });
     service = TestBed.inject(AuthguardService);
     userService = TestBed.inject(UserService);

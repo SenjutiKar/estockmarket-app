@@ -4,35 +4,40 @@
     Stock price added successfully.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
 </div>
-<form class="mx-auto mt-4" style="width: 90%;" #stockPriceFormGroup="ngForm" (ngSubmit)="onAddStock(stockPriceFormGroup)">
-    <div class="row mb-3">
-        <label for="inputCode" class="col-sm-2 col-form-label">Company Code</label>
-        <div class="col-sm-2">
-            <select id="inputState" class="form-select" required [(ngModel)]="code" #companyCode="ngModel"
-            name="companyCd" [ngClass]="{'is-invalid': companyCode.invalid && companyCode.touched }">
-                <option selected>Choose...</option>
-                <option *ngFor="let code of companyCodes">{{code}}</option>
-            </select>
-            <ng-container *ngIf="companyCode.invalid && companyCode.touched">
-                <div *ngIf="companyCode.errors?.['required']" class="invalid-feedback">
-                    Please select a company code
-                </div>
-            </ng-container>
+<div class="mx-auto mt-4">
+    <form class="mx-auto mt-4" style="width: 90%;" #stockPriceFormGroup="ngForm" (ngSubmit)="onAddStock(stockPriceFormGroup)">
+        <div class="row mb-3">
+            <label for="inputCode" class="col-sm-2 col-form-label">Company Code</label>
+            <div class="col-md-2">
+                <select id="inputState" class="form-select" required [(ngModel)]="code" #companyCode="ngModel"
+                name="companyCd" [ngClass]="{'is-invalid': companyCode.invalid && companyCode.touched }">
+                    <option></option>
+                    <option *ngFor="let code of companyCodes">{{code}}</option>
+                </select>
+                <ng-container *ngIf="companyCode.invalid && companyCode.touched">
+                    <div *ngIf="companyCode.errors?.['required']" class="invalid-feedback">
+                        Please select a company code
+                    </div>
+                </ng-container>
+            </div>
         </div>
-    </div>
-    <div class="row mb-3">
-        <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
-        <div class="col-sm-2">
-            <input type="number" class="form-control" id="inputPrice" required [(ngModel)]="price" #stockPrice="ngModel"
-            name="stockPr" [ngClass]="{'is-invalid': stockPrice.invalid && stockPrice.touched }">
-            <ng-container *ngIf="stockPrice.invalid && stockPrice.touched">
-                <div *ngIf="stockPrice.errors?.['required']" class="invalid-feedback">
-                    Please enter stock price amount
-                </div>
-            </ng-container>
+        <div class="row mb-3">
+            <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="inputPrice" required [(ngModel)]="price" #stockPrice="ngModel"
+                name="stockPr" [ngClass]="{'is-invalid': stockPrice.invalid && stockPrice.touched }">
+                <ng-container *ngIf="stockPrice.invalid && stockPrice.touched">
+                    <div *ngIf="stockPrice.errors?.['required']" class="invalid-feedback">
+                        Please enter stock price amount
+                    </div>
+                </ng-container>
+            </div>
         </div>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-primary" [disabled]="stockPriceFormGroup.invalid">Add Stock Price</button>
-    </div>
-</form>
+        <div>
+            <button type="submit" [ngClass]="stockPriceFormGroup.invalid ? 'btn btn-secondary' : 'btn btn-primary'" 
+            [disabled]="stockPriceFormGroup.invalid">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Add Stock Price</button>
+        </div>
+    </form>
+</div>

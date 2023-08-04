@@ -9,13 +9,15 @@ import { UserService } from './user.service';
 export class AuthguardService implements CanActivate {
 
   constructor(private router: Router,
-    private userService: UserService) { }
+    private userService: UserService) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.userService.getuserTokenDetails()) {
+    const token = this.userService.getuserTokenDetails();
+    if (token !== null && token !== undefined) {
       return true;
     }
-    this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }

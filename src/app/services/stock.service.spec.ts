@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { StockService } from './stock.service';
@@ -7,7 +8,8 @@ describe('StockService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers:[HttpClientTestingModule]
+      imports: [HttpClientTestingModule, HttpClientModule],
+      providers:[HttpClientTestingModule, StockService, HttpClient]
     });
     service = TestBed.inject(StockService);
   });

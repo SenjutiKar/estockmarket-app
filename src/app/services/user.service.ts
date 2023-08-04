@@ -5,7 +5,6 @@ import { User } from '../models/User';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import { Token } from '../models/Token';
-import { JwtHelperService } from '@auth0/angular-jwt'; 
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +17,10 @@ export class UserService {
       'Content-Type': 'application/json'
     })
   };
-  userToken = new BehaviorSubject(JSON.parse(localStorage.getItem('jwtToken')!));
+  userToken = new BehaviorSubject(localStorage.getItem('jwtToken'));
 
   constructor(private httpClient: HttpClient,
-    private router: Router, private jwtHelper: JwtHelperService) { }
+    private router: Router) { }
   
   getUserToken = this.userToken.asObservable();
 
@@ -29,21 +28,11 @@ export class UserService {
     return this.httpClient.post<any>(this.baseUrl + 'userauth/authenticate', usersdata, this.headers)
       .pipe(map(response => {
         const userToken = response;
-        localStorage.setItem('jwtToken', userToken);
+        localStorage.setItem('jwtToken', userToken.jwtToken);
         localStorage.setItem('username', usersdata.username);
-        this.userToken.next(userToken);
+        this.userToken.next(userToken.jwtToken);
         return userToken;
       }));
-  }
-
-  isUserAuthenticated() {
-    const token = this.getuserTokenDetails();
-    if (token && !this.jwtHelper.isTokenExpired(token)) {
-      return true;
-    }
-    else {
-      return false;
-    }
   }
 
   getuserTokenDetails() {

@@ -6,7 +6,7 @@ export class CompanyResponse {
     turnover: number = 0;
     url: string = '';
     stockExchange: string[] = [];
-    price: number = 0;
+    price: number = 0.00;
     date: string = '';
     time: string = '';
 }

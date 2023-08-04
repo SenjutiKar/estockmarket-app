@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { JwtInterceptor } from './Interceptors/jwt-interceptor.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     ViewCompanyComponent,
     AddStockComponent,
     LoginComponent,
-    HomeComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +36,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
     FormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    {provide: JWT_OPTIONS, useValue: JwtHelperService},
-    JwtHelperService
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

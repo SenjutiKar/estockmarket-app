@@ -9,9 +9,12 @@ import { UserService } from '../../services/user.service';
 })
 export class NavBarComponent implements OnInit {
 
+  public username: any;
+
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem('username');
   }
 
   logOut() {

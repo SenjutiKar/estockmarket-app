@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.userService.login(user)
       .pipe(first()).subscribe({
         next: () => {
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'view-all-companies';
           this.router.navigate([returnUrl]);
         },
         error: error => {
