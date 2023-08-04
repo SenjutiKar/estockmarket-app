@@ -12,7 +12,6 @@ import { ViewCompanyComponent } from './view-company/view-company.component';
 import { AddStockComponent } from './add-stock/add-stock.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { JwtInterceptor } from './Interceptors/jwt-interceptor.service';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
